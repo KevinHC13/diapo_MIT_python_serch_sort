@@ -1,0 +1,251 @@
+ 
+
+\documentclass[aspectratio=169]{beamer}
+%\usetheme{Boadilla}
+\usetheme{Warsaw}
+
+
+\usepackage{listings}
+\usepackage{xcolor}
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    language=Python,
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\tiny,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+
+ 
+\lstset{style=mystyle}
+%\usepackage{minted}
+
+
+\usepackage{datetime}
+\newdateformat{specialdate}{\twodigit{\THEDAY}-\twodigit{\THEMONTH}-\THEYEAR}
+\date{\specialdate\today}
+
+
+%\renewrobustcmd{\mkbibfootnote}{\normalsize\footnotemark\footnotetext}
+\setbeamerfont{footnote}{size=\tiny}
+
+\setbeamertemplate{footline}[frame number]{} % Evita que \pause 
+\setbeamertemplate{bibliography item}{\insertbiblabel} % Numeros en las referenicas en vez de iconos
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\title[\arabic{page} ]{Advanced Computer Graphics}
+\title[Arrays]{Arrays in Python [Sustituir por el titulo de la diapositiva - debe estar en ingl\'es]}
+% Sin subtitulos
+\subtitle{Object-Oriented Programming Class (ITI-27000)}
+\author{Zoila Reina Del-Verano [Sustituir por su nombre]}
+\institute[UPV]{Polytechnic University of Victoria}
+\date[]{September-December 2022}
+\logo{\pgfimage[width=1cm,height=1cm]{graphics/logo_upv_transparente}}			% Logo on all slides (pdf,png,jpg,eps)
+\titlegraphic{\includegraphics[height=1.5cm]{graphics/logo_upv_transparente} \hfil \includegraphics[height=1.5cm]{graphics/python.png}}	% Logo on title slide
+
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\tiny}
+  {}{}
+\makeatother
+
+
+\begin{document}
+
+% Diapositiva de título
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+\begin{frame}[fragile]{Integrating Jupyter-Notebook Output Cells in Beamer}
+
+\begin{columns}
+\column{0.48\linewidth}
+\begin{itemize}
+\item Create a cell in a new or existing jupyter notebook for the python program
+\item Execute the program cell, that generates the cell for the program output
+\item Copy the program output to a verbatim enviroment as shown in the code of this slide
+\end{itemize}
+
+\column{0.48\linewidth}
+Code for a \textit{for} loop:
+\begin{lstlisting}
+for i in range (10):
+    print ("Valor de i",i)
+\end{lstlisting}
+Output of the above code: 
+\begin{block}{}
+\begin{verbatim}
+Valor de i 0
+Valor de i 1
+Valor de i 2
+Valor de i 3
+Valor de i 4
+Valor de i 5
+Valor de i 6
+Valor de i 7
+Valor de i 8
+Valor de i 9
+\end{verbatim}
+\end{block}
+\end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Using lstlisting environment}
+This tutorial presents an example the use of \textbf{lstlisting} environment to highlight Python codes on Slides
+\begin{itemize}
+    \item The code can be inserted inline, or from files
+    \item Please remove unnecessary tabs and blank lines
+\end{itemize}
+\begin{lstlisting}
+# This program adds two numbers
+num1 = 1.5
+num2 = 6.3
+# Add two numbers
+sum = num1 + num2
+# Display the sum
+print('The sum of {0} and {1} is {2}'.format(num1, num2, sum))
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Insert Python Code}
+Please insert your code inside \textbf{listings} environment. Remove all unnecessary blank lines. A maxima of 24 lines of code should be in a slide (including comments)
+\begin{lstlisting}
+# Python program to check if year is a leap year or not
+year = 2000
+# To get year (integer input) from the user
+# year = int(input("Enter a year: "))
+# divided by 100 means century year (ending with 00)
+# century year divided by 400 is leap year
+if (year % 400 == 0) and (year % 100 == 0):
+    print("{0} is a leap year".format(year))
+# not divided by 100 means not a century year
+# year divided by 4 is a leap year
+elif (year % 4 ==0) and (year % 100 != 0):
+    print("{0} is a leap year".format(year))
+# if not divided by both 400 (century year) and 4 (not century year)
+# year is not leap year
+else:
+    print("{0} is not a leap year".format(year))
+    \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Insert Python Code from File}
+You can upload your code from a .py file (or save the current folder), as pass as argument to the \textit{lstinputlisting} command
+\lstinputlisting{ProgPython01.py}
+\end{frame}
+
+\begin{frame}{Tables in Latex}
+Please note that in this table we use three columns. You should modify it to fit your presentation. \textbf{Please do not insert an image instead of a table}
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+\textbf{Kotlin type} & \textbf{Factory function} &
+ \textbf{JVM type} \\
+ \hline
+ BooleanArray & booleanArrayOf(true, false) & boolean[] \\
+ByteArray & byteArrayOf(1, 2, 3) & byte[] \\
+CharArray & charArrayOf('a', 'b', 'c') & char[] \\
+DoubleArray & doubleArrayOf(1.2, 5.0) & double[] \\
+FloatArray & floatArrayOf(1.2, 5.0) & float[] \\
+IntArray & intArrayOf(1, 2, 3) & int[] \\
+LongArray & longArrayOf(1, 2, 3)& long[] \\
+ShortArray & shortArrayOf(1, 2, 3)& short[]\\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+% Nota1: La siguiente diapositiva muestra ejemplos de como insertar pequeños pedazos de codigo (declaracion de variables, codigos de no mas de 10 lineas) sin requerir guardar el codigo en un archivo por separado. Uselo 
+% NOta2: Siempre que quieran poner codigo a mano y no proveniente de un archivo, deben establecer el parametro fragile en este Frame
+\begin{frame}[fragile]
+\frametitle{Placing code in multiple columns}
+When required, you should adjust the code to multiple columns as shown in this slide
+\begin{columns}
+\column{0.48\linewidth}
+A variable is declared and represents a value that is expected to change throughout a program.
+\begin{lstlisting}
+age = 25
+string = 'Cadena'  
+\end{lstlisting}
+
+An immutable variable is declared with the val keyword and represents a value that must remain constant throughout a program.
+\begin{lstlisting}
+goldenRatio = 1.618
+\end{lstlisting}
+
+\column{0.48\linewidth}
+
+When a data type is not specified in a variable declaration, the variable’s data type can be inferred through type inference.
+\begin{lstlisting}
+color = "Purple" 
+\end{lstlisting}
+
+
+String concatenation is the process of combining Strings using the + operator.
+
+\begin{lstlisting}
+x = "Python is "
+y = "awesome"
+z =  x + y
+print(z)
+\end{lstlisting}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Using Images in Beamer}
+Images can be placed in one single column or in two (as shown in this slide)
+\begin{columns}
+
+\column{0.48\linewidth}
+\begin{itemize}
+\item Mobile Programming 
+\item Intelligent Systems
+\item Automaton and Languages
+\end{itemize}
+\column{0.48\linewidth}
+\begin{center}
+\includegraphics[width=0.98\linewidth]{graphics/Opengl-logo.png}    
+\end{center}
+
+
+\end{columns}
+\end{frame}
+
+
+\end{document}
+

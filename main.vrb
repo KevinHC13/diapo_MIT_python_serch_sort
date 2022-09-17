@@ -1,0 +1,17 @@
+\frametitle{Using Images in Beamer}
+Images can be placed in one single column or in two (as shown in this slide)
+\begin{columns}
+
+\column{0.48\linewidth}
+\begin{itemize}
+\item Mobile Programming
+\item Intelligent Systems
+\item Automaton and Languages
+\end{itemize}
+\column{0.48\linewidth}
+\begin{center}
+\includegraphics[width=0.98\linewidth]{graphics/Opengl-logo.png}
+\end{center}
+
+
+\end{columns}
