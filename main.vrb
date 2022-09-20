@@ -1,17 +1,15 @@
-\frametitle{Using Images in Beamer}
-Images can be placed in one single column or in two (as shown in this slide)
-\begin{columns}
-
-\column{0.48\linewidth}
+\frametitle{MERGE SORT ALGORITHM -- RECURSIVE}
+\begin{lstlisting}
+def merge_sort(L):
+	if len(L) < 2:
+		return L[:]
+	else:
+		middle = len(L)//2
+		left = merge_sort(L[:middle])
+		right = merge_sort(L[middle:])
+		return merge(left, right)
+\end{lstlisting}
 \begin{itemize}
-\item Mobile Programming
-\item Intelligent Systems
-\item Automaton and Languages
+\item \textcolor{red}{\textbf{divide list}} successively into halves
+\item depth-first such that \textcolor{red}{\textbf{conquer smallest pieces down one branch}} first before moving to larger pieces
 \end{itemize}
-\column{0.48\linewidth}
-\begin{center}
-\includegraphics[width=0.98\linewidth]{graphics/Opengl-logo.png}
-\end{center}
-
-
-\end{columns}

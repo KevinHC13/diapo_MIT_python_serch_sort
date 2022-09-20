@@ -33,6 +33,12 @@
 }
 
 
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	urlcolor=cyan
+}
+
  
 \lstset{style=mystyle}
 %\usepackage{minted}
@@ -680,63 +686,222 @@ while (j < len(right)):
 \end{itemize}
 \end{frame}
 
-% Nota1: La siguiente diapositiva muestra ejemplos de como insertar pequeños pedazos de codigo (declaracion de variables, codigos de no mas de 10 lineas) sin requerir guardar el codigo en un archivo por separado. Uselo 
-% NOta2: Siempre que quieran poner codigo a mano y no proveniente de un archivo, deben establecer el parametro fragile en este Frame
-\begin{frame}[fragile]
-\frametitle{Placing code in multiple columns}
-When required, you should adjust the code to multiple columns as shown in this slide
+\begin{frame}[fragile]{MERGING SUBLISTS}
 \begin{columns}
-\column{0.48\linewidth}
-A variable is declared and represents a value that is expected to change throughout a program.
+\column{0.65\linewidth}
+Example code:
 \begin{lstlisting}
-age = 25
-string = 'Cadena'  
+def merge(left, right):
+    result = []
+    i,j = 0,0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while (i < len(left)):
+        result.append(left[i])
+        i += 1
+    while (j < len(right)):
+        result.append(right[j])
+        j += 1
+    return result
+lista1=[2,4,7,9]
+lista2=[3,8,13]
+merge(lista1,lista2)
 \end{lstlisting}
-
-An immutable variable is declared with the val keyword and represents a value that must remain constant throughout a program.
-\begin{lstlisting}
-goldenRatio = 1.618
-\end{lstlisting}
-
-\column{0.48\linewidth}
-
-When a data type is not specified in a variable declaration, the variable’s data type can be inferred through type inference.
-\begin{lstlisting}
-color = "Purple" 
-\end{lstlisting}
-
-
-String concatenation is the process of combining Strings using the + operator.
-
-\begin{lstlisting}
-x = "Python is "
-y = "awesome"
-z =  x + y
-print(z)
-\end{lstlisting}
+\column{0.40\linewidth}
+Output:
+\begin{block}{}
+\begin{verbatim}
+[2, 3, 4, 7, 8, 9, 13]
+\end{verbatim}
+\end{block}
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]
-\frametitle{Using Images in Beamer}
-Images can be placed in one single column or in two (as shown in this slide)
-\begin{columns}
-
-\column{0.48\linewidth}
+\begin{frame}{COMPLEXITY OFMERGING SUBLISTS STEP}
 \begin{itemize}
-\item Mobile Programming 
-\item Intelligent Systems
-\item Automaton and Languages
+\item go through two lists, only one pass
+\item compare only \textcolor{red}{\textbf{smallest elements in each sublist}}
+\item O(len(left) + len(right)) copied elements
+\item O(len(longer list)) comparisons
+\item \textcolor{red}{\textbf{linear in length of the lists}}
 \end{itemize}
-\column{0.48\linewidth}
+\end{frame}
+
+\begin{frame}[fragile]{MERGE SORT ALGORITHM -- RECURSIVE}
+\begin{lstlisting}
+def merge_sort(L):
+	if len(L) < 2:
+		return L[:]
+	else:
+		middle = len(L)//2
+		left = merge_sort(L[:middle])
+		right = merge_sort(L[middle:])
+		return merge(left, right)
+\end{lstlisting}
+\begin{itemize}
+\item \textcolor{red}{\textbf{divide list}} successively into halves
+\item depth-first such that \textcolor{red}{\textbf{conquer smallest pieces down one branch}} first before moving to larger pieces
+\end{itemize}
+\end{frame}
+
+\begin{frame}
 \begin{center}
-\includegraphics[width=0.98\linewidth]{graphics/Opengl-logo.png}    
+\includegraphics[scale=0.8]{graphics/merge_sort_dia.png}
 \end{center}
+\end{frame}
 
-
-\end{columns}
+\begin{frame}{COMPLEXITY OF MERGE SORT}
+\begin{itemize}
+\item \textcolor{red}{\textbf{at first recursion level}}
+\begin{itemize}
+\item n/2 elements in each list
+\item O(n) + O(n) = O(n) where n is len(L)
+\end{itemize}
+\item at \textcolor{red}{\textbf{second recorsion level}}
+\begin{itemize}
+\item n/4 elements in each list
+\item two merges $\rightarrow$ O(n) where n is len(L)
+\end{itemize}
+\item each recursion level is O(n) where n is len(L)
+\item \textcolor{red}{\textbf{dividing list in half}} with each recursive call
+\begin{itemize}
+\item O(log(n)) where n is len(L)
+\end{itemize}
+\item overall complexity is \textcolor{red}{\textbf{O(n log(n)) where n is len(L)}}
+\end{itemize}
 \end{frame}
 
 
+\begin{frame}{SORTING SUMMARY --n is len(L)}
+\begin{itemize}
+\item bogo sort
+\begin{itemize}
+\item randomness, unbonded O()
+\end{itemize}
+\item bubble sort
+\begin{itemize}
+\item O($n^2$)
+\end{itemize}
+\item selection sort
+\begin{itemize}
+\item O($n^2$)
+\item guaranteed the first i elements were sorted
+\end{itemize}
+\item merge sort
+\begin{itemize}
+\item O(n log(n))
+\end{itemize}
+\item O(n log(n)) is the fastest a sort can be
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\Huge{WHAT HAVE WE SEEN IN 6.0001?}
+\end{frame}
+
+\begin{frame}{KEY TOPICS}
+\begin{itemize}
+\item represent knowledge with \textcolor{red}{\textbf{data structures}}
+\item \textcolor{red}{\textbf{iteration and recursion}} as computational metaphors
+\item \textcolor{red}{\textbf{abstraction}} of procedures and data types
+\item \textcolor{red}{\textbf{organize and modularize}} systems using object classes and methods
+\item different classes of \textcolor{red}{\textbf{algorithms}}, searching and sorAng
+\item \textcolor{red}{\textbf{complexity}} of algorithms
+\end{itemize}
+\end{frame}
+
+\begin{frame}{OVERVIEW OF COURSE}
+\begin{itemize}
+\item learn computational modes of thinking
+\item begin to master the art of computational problem solving
+\item make computers do what you want them to do
+\end{itemize}
+Hope we have started you down the path to being able to think and act like a computer scientist
+\end{frame}
+
+
+\begin{frame}{WHAT DO COMPUTER SCIENTISTS DO?}
+\begin{columns}
+\column{0.50\linewidth}
+\begin{itemize}
+\item they think computationally
+\begin{itemize}
+\item abstractions, algorithms, automated execution
+\end{itemize}
+\item just like the three r’s: reading, ‘riting, and ‘rithmetic -
+computational thinking is becoming a fundamental skill that
+every well-educated person will need
+\end{itemize}
+
+
+\column{0.40\linewidth}
+\begin{columns}
+\column{0.23\linewidth}
+\includegraphics[scale=0.34]{graphics/alan_turing.jpg}
+\tiny{Alan Turing
+Image in the Public Domain, courtesy of \href{https://es.wikipedia.org/wiki/Alan_Turing}{Wikipedia Commons}.}
+\column{0.23\linewidth}
+\includegraphics[scale=0.4]{graphics/ada_lovelace.jpg}
+\tiny{Ada Lovelace
+Image in the Public Domain, courtesy of \href{https://es.wikipedia.org/wiki/Ada_Lovelace}{Wikipedia Commons}.}
+\end{columns}
+\end{columns}
+\end{frame}
+
+\begin{frame}{THE THREE A’S OF COMPUTATIONAL THINKING}
+\begin{itemize}
+\item abstraction
+\begin{itemize}
+\item choosing the right abstractions
+\item operationg in multiple layers of abstraction simultaneously
+\item defining the relationships between the abstraction layers
+\end{itemize}
+\item automation
+\begin{itemize}
+\item think in terms of mechanizing our abstractions
+\item mechanization is possible – because we have precise and exacting notations and models; and because there is some “machine” that can interpret our notations
+\end{itemize}
+\item algorithms
+\begin{itemize}
+\item anguage for describing automated processes
+\item also allows abstaction of details
+\item language for communicating ideas \& processes
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{ASPECTS OF COMPUTATIONAL THINKING}
+\begin{itemize}
+\item how difficult is this problem and how best can I solve it?
+\begin{itemize}
+\item theoretical computer science gives precise meaning to these
+and related questions and their answers
+\end{itemize}
+\item thinking recursively
+\begin{itemize}
+\item reformulating a seemingly difficult problem into onewhich we know how to solve
+\item reduction, embedding, transformation, simulaAon
+
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+MIT OpenCourseWare\\
+\url{https://ocw.mit.edu}
+\par
+\vspace{1cm}
+6.0001 Introduction to Computer Science and Programming in Python\\
+Fall 2016\\
+\par
+\vspace{2cm}
+For information about citing these materials or our Terms of Use, visit:\url{https://ocw.mit.edu/terms}
+
+\end{frame}
 \end{document}
 
